@@ -49,14 +49,67 @@ void registerAccount() {
     user++;
     
     //final confirmation message
-    cout << ch << ch << " Account Registerd " << ch << ch;
+    cout << "\n\n" << ch << ch << " Account Registerd " << ch << ch;
 
     
 }
 
 void loginAccount() {
+    system("cls"); // clear the screen
 
+    //heading
+    char ch = 178;
+    for(int i = 1; i <= 25; i++) {
+        cout << ch;
+    }
+
+    cout << " Security System using C++ " ;
+
+    for(int i = 1; i <= 25; i++) {
+        cout << ch;
+    }
+
+    //login now
+    if(user == 0) {
+        cout << "\n\n" << ch << ch << " No Record Found " << ch << ch;
+    }
+    else {
+
+        //take email and password as input for login
+        string testEmail, testPassword;
+        cout << "\n\n" << "Enter User Email: ";
+        cin >> testEmail;
+
+        cout << "\n\n" << "Enter User Password: "; //dynamic password input
+        char temp;
+        do
+        {
+            temp = getch();
+            if(isdigit(temp) || isalpha(temp) || ispunct(temp)) {
+                testPassword += temp;
+                cout << "*";
+            }
+        } while (isdigit(temp) || isalpha(temp) || ispunct(temp));
+
+        //check the credentials in the record R[]
+        int found = 0;
+        for(int k = 0; k < user; k++) {
+            if(testEmail == R[k].email && testPassword == R[k].password) { //match found
+                cout << "\n\n" << "User ID: " << R[k].id;
+                cout << "\n\n" << "Enter User Name: " << R[k].name;
+                cout << "\n\n" << "Enter User Email: " << R[k].email;
+                cout << "\n\n" << "Enter User Password: " << R[k].password;
+                found++;
+                break; 
+            }
+        }
+        if(found == 0) { // creadentials not found in the record R
+            cout << "\n\n" << ch << ch << " Invalid Credentials " << ch << ch;
+        }
+    }
 }
+
+
 
 main () {
     p:
@@ -98,6 +151,7 @@ main () {
         registerAccount();
         break;
     case 2:
+        loginAccount();
         break;
     case 3:
         break;
@@ -109,6 +163,7 @@ main () {
     default:
         cout << ch << ch << " Please enter correct choice " << ch << ch;
     }
+    getch();
     goto p;
 
 }
