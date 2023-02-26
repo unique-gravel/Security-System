@@ -109,7 +109,102 @@ void loginAccount() {
     }
 }
 
+void forgotEmail() {
+    system("cls"); // clear the screen
 
+    //heading
+    char ch = 178;
+    for(int i = 1; i <= 25; i++) {
+        cout << ch;
+    }
+
+    cout << " Security System using C++ " ;
+
+    for(int i = 1; i <= 25; i++) {
+        cout << ch;
+    }
+
+    //login now using password only
+    if(user == 0) {
+        cout << "\n\n" << ch << ch << " No Record Found " << ch << ch;
+    }
+    else {
+
+        //take password as input for login
+        string testPassword;
+
+        cout << "\n\n" << "Enter User Password: "; //dynamic password input
+        char temp;
+        do
+        {
+            temp = getch();
+            if(isdigit(temp) || isalpha(temp) || ispunct(temp)) {
+                testPassword += temp;
+                cout << "*";
+            }
+        } while (isdigit(temp) || isalpha(temp) || ispunct(temp));
+
+        //check the credentials in the record R[]
+        int found = 0;
+        for(int k = 0; k < user; k++) {
+            if(testPassword == R[k].password) { //match found
+                cout << "\n\n" << "User ID: " << R[k].id;
+                cout << "\n\n" << "Enter User Name: " << R[k].name;
+                cout << "\n\n" << "Enter User Email: " << R[k].email;
+                cout << "\n\n" << "Enter User Password: " << R[k].password;
+                found++;
+                break; 
+            }
+        }
+        if(found == 0) { // creadentials not found in the record R
+            cout << "\n\n" << ch << ch << " Invalid Credentials " << ch << ch;
+        }
+    }
+}
+
+void forgotPassword() {
+    system("cls"); // clear the screen
+
+    //heading
+    char ch = 178;
+    for(int i = 1; i <= 25; i++) {
+        cout << ch;
+    }
+
+    cout << " Security System using C++ " ;
+
+    for(int i = 1; i <= 25; i++) {
+        cout << ch;
+    }
+
+    //login now using email only
+    if(user == 0) {
+        cout << "\n\n" << ch << ch << " No Record Found " << ch << ch;
+    }
+    else {
+
+        //take email and password as input for login
+        string testEmail;
+        cout << "\n\n" << "Enter User Email: ";
+        cin >> testEmail;
+
+        //check the credentials in the record R[]
+        int found = 0;
+        for(int k = 0; k < user; k++) {
+            if(testEmail == R[k].email) { //match found
+                cout << "\n\n" << "User ID: " << R[k].id;
+                cout << "\n\n" << "Enter User Name: " << R[k].name;
+                cout << "\n\n" << "Enter User Email: " << R[k].email;
+                cout << "\n\n" << "Enter User Password: " << R[k].password;
+                found++;
+                break; 
+            }
+        }
+        if(found == 0) { // creadentials not found in the record R
+            cout << "\n\n" << ch << ch << " Invalid Credentials " << ch << ch;
+        }
+    }
+}
 
 main () {
     p:
@@ -154,8 +249,10 @@ main () {
         loginAccount();
         break;
     case 3:
+        forgotEmail();
         break;
     case 4:
+        forgotPassword();
         break;
     case 5:
         exit(0);
